@@ -14,6 +14,24 @@ datasource db {
     relationMode = "prisma"
 }
 
+model Card {
+    id          String   @id @default(cuid())
+    name        String
+    level       String // 段位
+    star        String // 星级
+    character   String // 角色
+    discription String   @default("")
+    series      String   @default("") // 隶属活动
+    source      String   @default("") // 获取方式: 常驻, 限定, ...
+    type        String   @default("") // 类型: 约会, 轨迹, ...
+    video       String   @default("") // 视频链接
+    image       String   @default("") // 图片链接(2, 1)
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+
+    @@unique([name, level])
+}
+
 model Post {
     id        Int      @id @default(autoincrement())
     name      String
