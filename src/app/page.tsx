@@ -1,5 +1,6 @@
 import { unstable_noStore as noStore } from "next/cache";
 import Link from "next/link";
+import Image from "next/image";
 
 // import { CreatePost } from "~/app/_components/create-post";
 import { CreateCard } from "~/app/_components/create-card";
@@ -71,10 +72,17 @@ export default async function Home() {
           {cards.map((card) => (
             <div className=" " key={card.id}>
               <Link className="" href={`/card/${card.id}`}>
-                <img
+                {/* <img
                   className=" h-56 w-36 rounded-lg object-cover"
                   src={card.image}
                   alt={card.id}
+                /> */}
+                <Image
+                  src={card.image}
+                  alt="Picture of the author"
+                  className=" rounded-lg object-cover" // h-56 w-36
+                  width={144}
+                  height={224}
                 />
               </Link>
             </div>
