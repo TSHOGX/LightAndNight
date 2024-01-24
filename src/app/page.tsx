@@ -83,6 +83,8 @@ export default async function Home() {
                   className=" rounded-lg object-cover" // h-56 w-36
                   width={144}
                   height={224}
+                  // layout="responsive"
+                  loading="lazy"
                 />
               </Link>
             </div>
