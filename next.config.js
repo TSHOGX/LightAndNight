@@ -10,9 +10,27 @@ const config = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "**.sinaimg.cn",
+        hostname: "wx4.sinaimg.cn",
         port: "",
-        pathname: "/**",
+        pathname: "/large/**",
+      },
+      {
+        protocol: "https",
+        hostname: "wx3.sinaimg.cn",
+        port: "",
+        pathname: "/large/**",
+      },
+      {
+        protocol: "https",
+        hostname: "wx2.sinaimg.cn",
+        port: "",
+        pathname: "/large/**",
+      },
+      {
+        protocol: "https",
+        hostname: "wx1.sinaimg.cn",
+        port: "",
+        pathname: "/large/**",
       },
     ],
   },
