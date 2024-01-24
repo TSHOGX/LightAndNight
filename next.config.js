@@ -22,6 +22,12 @@ const config = {
       },
       {
         protocol: "https",
+        hostname: "wx3.sinaimg.cn",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
         hostname: "wx2.sinaimg.cn",
         port: "",
         pathname: "/large/**",

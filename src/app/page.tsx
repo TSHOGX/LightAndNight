@@ -72,20 +72,22 @@ export default async function Home() {
           {cards.map((card) => (
             <div className=" " key={card.id}>
               <Link className="" href={`/card/${card.id}`}>
-                {/* <img
+                <img
                   className=" h-56 w-36 rounded-lg object-cover"
                   src={card.image}
                   alt={card.id}
-                /> */}
-                <Image
+                />
+                {/* <Image
                   src={card.image}
+                  blurDataURL={card.image}
+                  placeholder="blur"
                   alt="Picture of the author"
                   className=" rounded-lg object-cover" // h-56 w-36
                   width={144}
                   height={224}
                   // layout="responsive"
                   loading="lazy"
-                />
+                /> */}
               </Link>
             </div>
           ))}

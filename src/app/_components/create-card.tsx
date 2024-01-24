@@ -13,7 +13,7 @@ export function CreateCard() {
   const [character, setCharacter] = useState("萧逸");
   const [discription, setDiscription] = useState("");
   const [series, setSeries] = useState("");
-  const [source, setSource] = useState("");
+  const [source, setSource] = useState("限定");
   const [type, setType] = useState("约会");
   const [video, setVideo] = useState("");
   const [image, setImage] = useState("");
@@ -27,7 +27,7 @@ export function CreateCard() {
       setCharacter("萧逸");
       setDiscription("");
       setSeries("");
-      setSource("");
+      setSource("限定");
       setType("约会");
       setVideo("");
       setImage("");
@@ -107,13 +107,21 @@ export function CreateCard() {
         onChange={(e) => setSeries(e.target.value)}
         className="w-full rounded-full px-4 py-2 text-black"
       />
-      <input
-        type="text"
-        placeholder="获取方式"
+      <select
         value={source}
         onChange={(e) => setSource(e.target.value)}
         className="w-full rounded-full px-4 py-2 text-black"
-      />
+      >
+        <option value="限定">限定</option>
+        <option value="常驻">常驻</option>
+        <option value="生日">生日</option>
+        <option value="周年">周年</option>
+        <option value="中秋">中秋</option>
+        <option value="春节">春节</option>
+        <option value="元旦">元旦</option>
+        <option value="万圣">万圣</option>
+        <option value="-">-</option>
+      </select>
       <select
         value={type}
         onChange={(e) => setType(e.target.value)}
