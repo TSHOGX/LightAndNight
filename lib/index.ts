@@ -1,38 +1,35 @@
 "use server";
 
-import { promises as fs } from "fs";
 import { Item } from "./types";
+
+const url_prefix =
+  "https://raw.githubusercontent.com/TSHOGX/data/main/bilibili_game";
 
 export async function getTags(flag: string) {
   let data: Item[] = [];
   if (flag === "LN") {
-    const file01 = await fs.readFile(
-      process.cwd() + "/app/data/LightAndNight-01.json",
-      "utf8"
+    const file01 = await fetch(url_prefix + "/LightAndNight-01.json").then(
+      (res) => res.json()
     );
-    data.push(...JSON.parse(file01));
-    const file02 = await fs.readFile(
-      process.cwd() + "/app/data/LightAndNight-02.json",
-      "utf8"
+    data.push(...file01);
+    const file02 = await fetch(url_prefix + "/LightAndNight-02.json").then(
+      (res) => res.json()
     );
-    data.push(...JSON.parse(file02));
-    const file03 = await fs.readFile(
-      process.cwd() + "/app/data/LightAndNight-03.json",
-      "utf8"
+    data.push(...file02);
+    const file03 = await fetch(url_prefix + "/LightAndNight-03.json").then(
+      (res) => res.json()
     );
-    data.push(...JSON.parse(file03));
+    data.push(...file03);
   } else if (flag === "LD") {
-    const file = await fs.readFile(
-      process.cwd() + "/app/data/LoveAndDeepspace.json",
-      "utf8"
+    const file = await fetch(url_prefix + "/LoveAndDeepspace.json").then(
+      (res) => res.json()
     );
-    data = JSON.parse(file);
+    data = file;
   } else if (flag === "BW") {
-    const file = await fs.readFile(
-      process.cwd() + "/app/data/BeyondTheWorld.json",
-      "utf8"
+    const file = await fetch(url_prefix + "/BeyondTheWorld.json").then((res) =>
+      res.json()
     );
-    data = JSON.parse(file);
+    data = file;
   }
 
   const uniqueTags = new Set<string>();
@@ -49,33 +46,28 @@ export async function getTags(flag: string) {
 export async function getAllItem(flag: string) {
   let data: Item[] = [];
   if (flag === "LN") {
-    const file01 = await fs.readFile(
-      process.cwd() + "/app/data/LightAndNight-01.json",
-      "utf8"
+    const file01 = await fetch(url_prefix + "/LightAndNight-01.json").then(
+      (res) => res.json()
     );
-    data.push(...JSON.parse(file01));
-    const file02 = await fs.readFile(
-      process.cwd() + "/app/data/LightAndNight-02.json",
-      "utf8"
+    data.push(...file01);
+    const file02 = await fetch(url_prefix + "/LightAndNight-02.json").then(
+      (res) => res.json()
     );
-    data.push(...JSON.parse(file02));
-    const file03 = await fs.readFile(
-      process.cwd() + "/app/data/LightAndNight-03.json",
-      "utf8"
+    data.push(...file02);
+    const file03 = await fetch(url_prefix + "/LightAndNight-03.json").then(
+      (res) => res.json()
     );
-    data.push(...JSON.parse(file03));
+    data.push(...file03);
   } else if (flag === "LD") {
-    const file = await fs.readFile(
-      process.cwd() + "/app/data/LoveAndDeepspace.json",
-      "utf8"
+    const file = await fetch(url_prefix + "/LoveAndDeepspace.json").then(
+      (res) => res.json()
     );
-    data = JSON.parse(file);
+    data = file;
   } else if (flag === "BW") {
-    const file = await fs.readFile(
-      process.cwd() + "/app/data/BeyondTheWorld.json",
-      "utf8"
+    const file = await fetch(url_prefix + "/BeyondTheWorld.json").then((res) =>
+      res.json()
     );
-    data = JSON.parse(file);
+    data = file;
   }
 
   //   const newData: SmallItem[] = data.map((item) => ({
