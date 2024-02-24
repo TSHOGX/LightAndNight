@@ -1,41 +1,28 @@
 "use server";
 
-import { Item } from "./types";
-
-const url_prefix =
-  "https://raw.githubusercontent.com/TSHOGX/data/main/bilibili_game";
+import { Item, URLPREFIX } from "./types";
 
 export async function getTags(flag: string) {
   let data: Item[] = [];
+
   if (flag === "LN") {
-    const file01 = await fetch(url_prefix + "/LightAndNight-01.json").then(
-      (res) => res.json()
-    );
-    data.push(...file01);
-    const file02 = await fetch(url_prefix + "/LightAndNight-02.json").then(
-      (res) => res.json()
-    );
-    data.push(...file02);
-    const file03 = await fetch(url_prefix + "/LightAndNight-03.json").then(
-      (res) => res.json()
-    );
-    data.push(...file03);
-  } else if (flag === "LD") {
-    const file = await fetch(url_prefix + "/LoveAndDeepspace.json").then(
-      (res) => res.json()
-    );
-    data = file;
-  } else if (flag === "BW") {
-    const file = await fetch(url_prefix + "/BeyondTheWorld.json").then((res) =>
+    data = await fetch(URLPREFIX + "/LightAndNight.json").then((res) =>
       res.json()
     );
-    data = file;
+  } else if (flag === "LD") {
+    data = await fetch(URLPREFIX + "/LoveAndDeepspace.json").then((res) =>
+      res.json()
+    );
+  } else if (flag === "BW") {
+    data = await fetch(URLPREFIX + "/LoveAndDeepspace.json").then((res) =>
+      res.json()
+    );
   }
 
   const uniqueTags = new Set<string>();
 
   data.forEach((item) => {
-    uniqueTags.add(item.tag);
+    uniqueTags.add(item.character_name);
   });
 
   const tagsArray = Array.from(uniqueTags);
@@ -45,35 +32,39 @@ export async function getTags(flag: string) {
 
 export async function getAllItem(flag: string) {
   let data: Item[] = [];
+
   if (flag === "LN") {
-    const file01 = await fetch(url_prefix + "/LightAndNight-01.json").then(
-      (res) => res.json()
-    );
-    data.push(...file01);
-    const file02 = await fetch(url_prefix + "/LightAndNight-02.json").then(
-      (res) => res.json()
-    );
-    data.push(...file02);
-    const file03 = await fetch(url_prefix + "/LightAndNight-03.json").then(
-      (res) => res.json()
-    );
-    data.push(...file03);
-  } else if (flag === "LD") {
-    const file = await fetch(url_prefix + "/LoveAndDeepspace.json").then(
-      (res) => res.json()
-    );
-    data = file;
-  } else if (flag === "BW") {
-    const file = await fetch(url_prefix + "/BeyondTheWorld.json").then((res) =>
+    data = await fetch(URLPREFIX + "/LightAndNight.json").then((res) =>
       res.json()
     );
-    data = file;
+  } else if (flag === "LD") {
+    data = await fetch(URLPREFIX + "/LoveAndDeepspace.json").then((res) =>
+      res.json()
+    );
+  } else if (flag === "BW") {
+    data = await fetch(URLPREFIX + "/LoveAndDeepspace.json").then((res) =>
+      res.json()
+    );
   }
 
-  //   const newData: SmallItem[] = data.map((item) => ({
-  //     title: item.title,
-  //     href: item.href,
-  //   }));
-
   return data;
+}
+
+export async function getItemById(id: string) {
+  let data: Item[] = [];
+
+  const data1 = await fetch(URLPREFIX + "/LightAndNight.json").then((res) =>
+    res.json()
+  );
+  const data2 = await fetch(URLPREFIX + "/LoveAndDeepspace.json").then((res) =>
+    res.json()
+  );
+  data = await fetch(URLPREFIX + "/LoveAndDeepspace.json").then((res) =>
+    res.json()
+  );
+
+  data.push(...data1);
+  data.push(...data2);
+
+  return data.find((item) => item.id.toString() === id);
 }
