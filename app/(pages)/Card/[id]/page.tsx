@@ -13,14 +13,14 @@ export default async function Card({ params }: { params: { id: string } }) {
     <div className=" container px-6 mx-auto my-12 flex flex-col gap-6">
       <div className=" gap-12 grid grid-cols-1 sm:grid-cols-2">
         <div className=" flex flex-col">
-          <ImageView images={item["weibo pics"]} />
+          <ImageView images={item.weibo_imgs} />
         </div>
 
         <div className=" flex flex-col gap-12">
           <div>{item.title}</div>
 
-          {item["bilibili video"] ? (
-            item["bilibili video"].map((video, i) => (
+          {item.bilibili_video ? (
+            item.bilibili_video.map((video, i) => (
               <Link
                 isExternal
                 showAnchorIcon

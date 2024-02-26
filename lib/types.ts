@@ -1,5 +1,5 @@
 export const LNURL =
-  "https://raw.githubusercontent.com/TSHOGX/data/main/processor/LN/LNlocal.json";
+  "https://raw.githubusercontent.com/TSHOGX/data/main/processor/LN/LN.json";
 
 export const URLPREFIX =
   "https://raw.githubusercontent.com/TSHOGX/data/main/processor/";
@@ -10,14 +10,14 @@ export const MEDIAPREFIX =
 export type Item = {
   title: string;
   character: string;
-  "card name": string;
+  card_name: string;
   stars: string;
   activity: string;
   type: string;
   description: string;
-  "bilibili video": string[];
+  bilibili_video: string[];
   weibo: string;
-  "weibo pics": string[];
-  "local pics": string[];
+  weibo_imgs: string[];
+  created_at: string;
   id: string;
 };

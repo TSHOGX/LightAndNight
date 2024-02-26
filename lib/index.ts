@@ -2,6 +2,54 @@
 
 import { Item, URLPREFIX, LNURL } from "./types";
 
+export async function getActivity(flag: string) {
+  let data: Item[] = [];
+
+  if (flag === "LN") {
+    data = await fetch(LNURL).then((res) => res.json());
+  } else if (flag === "LD") {
+    data = await fetch(URLPREFIX + "/LoveAndDeepspace.json").then((res) =>
+      res.json()
+    );
+  } else if (flag === "BW") {
+    data = await fetch(URLPREFIX + "/LoveAndDeepspace.json").then((res) =>
+      res.json()
+    );
+  }
+
+  const activitySet = new Set<string>();
+
+  data.forEach((item) => {
+    activitySet.add(item.activity);
+  });
+
+  return Array.from(activitySet);
+}
+
+export async function getCharacter(flag: string) {
+  let data: Item[] = [];
+
+  if (flag === "LN") {
+    data = await fetch(LNURL).then((res) => res.json());
+  } else if (flag === "LD") {
+    data = await fetch(URLPREFIX + "/LoveAndDeepspace.json").then((res) =>
+      res.json()
+    );
+  } else if (flag === "BW") {
+    data = await fetch(URLPREFIX + "/LoveAndDeepspace.json").then((res) =>
+      res.json()
+    );
+  }
+
+  const characterSet = new Set<string>();
+
+  data.forEach((item) => {
+    characterSet.add(item.character);
+  });
+
+  return Array.from(characterSet);
+}
+
 export async function getTypes(flag: string) {
   let data: Item[] = [];
 
@@ -23,9 +71,7 @@ export async function getTypes(flag: string) {
     uniqueTypes.add(item.type);
   });
 
-  const typesArray = Array.from(uniqueTypes);
-
-  return typesArray;
+  return Array.from(uniqueTypes);
 }
 
 export async function getAllItem(flag: string) {
@@ -42,11 +88,6 @@ export async function getAllItem(flag: string) {
       res.json()
     );
   }
-
-  // add id to each item
-  data.forEach((item: Item, index: any) => {
-    item.id = index;
-  });
 
   return data;
 }
@@ -67,10 +108,5 @@ export async function getItemById(id: string) {
 
   data = data1;
 
-  // add id to each item
-  data.forEach((item: Item, index: any) => {
-    item.id = index;
-  });
-
-  return data.find((item) => item.id.toString() === id);
+  return data.find((item) => item.id === id);
 }
