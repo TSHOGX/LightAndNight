@@ -1,24 +1,26 @@
 "use client";
 
-import { getTags, getAllItem } from "@/lib";
+import { getTypes, getAllItem } from "@/lib";
 import { useState, useEffect } from "react";
 
 import { Divider, Link, Select, SelectItem } from "@nextui-org/react";
 import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/react";
 import Image from "next/image";
-import { Item, MEDIAPREFIX } from "@/lib/types";
+import { Item } from "@/lib/types";
 
-export default function LightAndNight() {
+export default function BeyondTheWorld() {
   const [tags, setTags] = useState<string[]>();
-  const [selectedTag, setSelectedTag] = useState<Set<string>>(new Set(["All"]));
+  const [selectedType, setSelectedType] = useState<Set<string>>(
+    new Set(["All"])
+  );
   const [items, setItems] = useState<Item[]>([]);
 
   useEffect(() => {
     async function fetchData() {
-      await getTags("BW").then((res) => {
+      await getTypes("LN").then((res) => {
         setTags(["All"].concat(res));
       });
-      await getAllItem("BW").then((res) => {
+      await getAllItem("LN").then((res) => {
         setItems(res);
       });
     }
@@ -35,9 +37,9 @@ export default function LightAndNight() {
       <Select
         label="Select an tag"
         className="max-w-xs mx-auto"
-        selectedKeys={selectedTag}
+        selectedKeys={selectedType}
         // @ts-ignore
-        onSelectionChange={setSelectedTag}
+        onSelectionChange={setSelectedType}
       >
         {tags.map((tag, i) => (
           <SelectItem key={tag} value={i}>
@@ -48,10 +50,10 @@ export default function LightAndNight() {
       <div className=" gap-6 grid grid-cols-1 mx-auto sm:grid-cols-4">
         {items
           .filter((item) => {
-            if (selectedTag.has("All")) {
+            if (selectedType.has("All")) {
               return true;
             }
-            return selectedTag.has(item.character_name);
+            return selectedType.has(item.type);
           })
           .map((item, index) => (
             <Link href={`/Card/${item.id}`} key={index}>
@@ -70,9 +72,9 @@ export default function LightAndNight() {
                   </h4>
                 </CardHeader> */}
                 <CardFooter className="absolute z-10 bottom-0 text-small uppercase text-white justify-end">
-                  {item.video ? "go for video" : ""}
+                  {item["bilibili video"] ? "go for video" : ""}
                 </CardFooter>
-                {item.pics_weibo[0] === "" ? (
+                {item["weibo pics"][0] === "" ? (
                   <video
                     autoPlay
                     width="500"
@@ -80,7 +82,10 @@ export default function LightAndNight() {
                     controls
                     preload="none"
                   >
-                    <source src={`${item.video_weibo[0]}`} type="video/mp4" />
+                    <source
+                      src={`${item["bilibili video"][0]}`}
+                      type="video/mp4"
+                    />
                     Your browser does not support the video tag.
                   </video>
                 ) : (
@@ -88,7 +93,7 @@ export default function LightAndNight() {
                     alt="Network Error"
                     className="z-0 object-cover"
                     // src="/images/card-example-4.jpeg"
-                    src={`${item.pics_weibo[0]}`}
+                    src={`${item["weibo pics"][0]}`}
                     width={500}
                     height={500}
                     loading="lazy"

@@ -1,14 +1,12 @@
 "use server";
 
-import { Item, URLPREFIX } from "./types";
+import { Item, URLPREFIX, LNURL } from "./types";
 
-export async function getTags(flag: string) {
+export async function getTypes(flag: string) {
   let data: Item[] = [];
 
   if (flag === "LN") {
-    data = await fetch(URLPREFIX + "/LightAndNight.json").then((res) =>
-      res.json()
-    );
+    data = await fetch(LNURL).then((res) => res.json());
   } else if (flag === "LD") {
     data = await fetch(URLPREFIX + "/LoveAndDeepspace.json").then((res) =>
       res.json()
@@ -19,24 +17,22 @@ export async function getTags(flag: string) {
     );
   }
 
-  const uniqueTags = new Set<string>();
+  const uniqueTypes = new Set<string>();
 
   data.forEach((item) => {
-    uniqueTags.add(item.character_name);
+    uniqueTypes.add(item.type);
   });
 
-  const tagsArray = Array.from(uniqueTags);
+  const typesArray = Array.from(uniqueTypes);
 
-  return tagsArray;
+  return typesArray;
 }
 
 export async function getAllItem(flag: string) {
   let data: Item[] = [];
 
   if (flag === "LN") {
-    data = await fetch(URLPREFIX + "/LightAndNight.json").then((res) =>
-      res.json()
-    );
+    data = await fetch(LNURL).then((res) => res.json());
   } else if (flag === "LD") {
     data = await fetch(URLPREFIX + "/LoveAndDeepspace.json").then((res) =>
       res.json()
@@ -46,6 +42,11 @@ export async function getAllItem(flag: string) {
       res.json()
     );
   }
+
+  // add id to each item
+  data.forEach((item: Item, index: any) => {
+    item.id = index;
+  });
 
   return data;
 }
@@ -53,18 +54,23 @@ export async function getAllItem(flag: string) {
 export async function getItemById(id: string) {
   let data: Item[] = [];
 
-  const data1 = await fetch(URLPREFIX + "/LightAndNight.json").then((res) =>
-    res.json()
-  );
-  const data2 = await fetch(URLPREFIX + "/LoveAndDeepspace.json").then((res) =>
-    res.json()
-  );
-  data = await fetch(URLPREFIX + "/LoveAndDeepspace.json").then((res) =>
-    res.json()
-  );
+  const data1 = await fetch(LNURL).then((res) => res.json());
+  // const data2 = await fetch(URLPREFIX + "/LoveAndDeepspace.json").then((res) =>
+  //   res.json()
+  // );
+  // data = await fetch(URLPREFIX + "/LoveAndDeepspace.json").then((res) =>
+  //   res.json()
+  // );
 
-  data.push(...data1);
-  data.push(...data2);
+  // data.push(...data1);
+  // data.push(...data2);
+
+  data = data1;
+
+  // add id to each item
+  data.forEach((item: Item, index: any) => {
+    item.id = index;
+  });
 
   return data.find((item) => item.id.toString() === id);
 }
